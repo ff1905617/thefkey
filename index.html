@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>THE F KEY</title>
+</head>
+<body>
+<div class="container">
+    <div class="piano">
+
+        <div class="side-panel-1"></div>
+        <div class="side-panel-2"></div>
+
+        <div class="plaque">
+            <div class="p-part-1"></div>
+            <div class="p-part-2">
+                <div class="p-part-3">
+                    <h1>The F Key</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen"><h2>THE F KEY WAS CREATED BY BENI YOROHAN, RORY O'DONNELL AND FRANCIS FITZGERALD</h2></div>
+
+        <div class="light-1"></div>
+        <div class="light-2"></div>
+
+        <div class="keys-container">
+            <div class="piano-keys">
+                <ul class="keys-list">
+                    <li class="keys white" data-note="C"></li>
+                    <li class="keys black" data-note="Cs"></li>
+                    <li class="keys white" data-note="D"></li>
+                    <li class="keys black" data-note="Ds"></li>
+                    <li class="keys white" data-note="E"></li>
+                    <li class="keys white" data-note="F"></li>
+                    <li class="keys black" data-note="Fs"></li>
+                    <li class="keys white" data-note="G"></li>
+                    <li class="keys black" data-note="Gs"></li>
+                    <li class="keys white" data-note="A"></li>
+                    <li class="keys black" data-note="As"></li>
+                    <li class="keys white" data-note="B"></li>
+                    <li class="keys white" data-note="Bs"></li>
+                    <li class="keys black" data-note="C1"></li>
+                    <li class="keys white" data-note="Cs1"></li>
+                    <li class="keys black" data-note="D1"></li>
+                    <li class="keys white" data-note="Ds1"></li>
+                </ul>
+            
+                <audio src="KeySounds/01.mp3" id="C"></audio>
+                <audio src="KeySounds/02.mp3" id="Cs"></audio>
+                <audio src="KeySounds/03.mp3" id="D"></audio>
+                <audio src="KeySounds/04.mp3" id="Ds"></audio>
+                <audio src="KeySounds/05.mp3" id="E"></audio>
+                <audio src="KeySounds/06.mp3" id="F"></audio>
+                <audio src="KeySounds/07.mp3" id="Fs"></audio>
+                <audio src="KeySounds/08.mp3" id="G"></audio>
+                <audio src="KeySounds/09.mp3" id="Gs"></audio>
+                <audio src="KeySounds/10.mp3" id="A"></audio>
+                <audio src="KeySounds/11.mp3" id="As"></audio>
+                <audio src="KeySounds/12.mp3" id="B"></audio>
+                <audio src="KeySounds/13.mp3" id="Bs"></audio>
+                <audio src="KeySounds/14.mp3" id="C1"></audio>
+                <audio src="KeySounds/15.mp3" id="Cs1"></audio>
+                <audio src="KeySounds/16.mp3" id="D1"></audio>
+                <audio src="KeySounds/17.mp3" id="Ds1"></audio>
+            
+            </div>
+        </div>
+
+        <script>
+
+        const keys = document.querySelectorAll('.keys');
+        const drums = document.querySelectorAll('.keys.drum-buttons');
+        const regulars = document.querySelectorAll('.keys.white');
+        const sharps = document.querySelectorAll('.keys.black');
+        const whites = ['a', 's', 'd', 'f', 'g', 'h', 'j','k','l',';'];
+        const blacks = ['w', 'e', 'r', 't', 'y','u','i']
+        const pads = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+        keys.forEach(key => {
+            key.addEventListener('click', () => playNote(key))
+        })
+
+        document.addEventListener('keydown', e => {
+            if (e.repeat) return
+            const key = e.key
+            const whiteKeyIndex = whites.indexOf(key)
+            const blackKeyIndex = blacks.indexOf(key)
+            const padKeyIndex = pads.indexOf(key)
+
+            if (whiteKeyIndex > -1) playNote(regulars[whiteKeyIndex])
+            if (blackKeyIndex > -1) playNote(sharps[blackKeyIndex])
+            if (padKeyIndex > -1) playNote(drums[padKeyIndex])
+        })
+
+        let playNote = (key) => {
+            const noteSound = document.getElementById(key.dataset.note)
+            noteSound.currentTime = 0
+            noteSound.play()
+            key.classList.add('active')
+            noteSound.addEventListener('ended', () => {
+                key.classList.remove('active')
+            })
+        }
+        </script>
+
+        <div class="drum-container">
+            <div class="drum-grid">
+                <div class="keys drum-buttons" data-note="d1" onclick="document.getElementById('d1').play();"></div>
+                <div class="keys drum-buttons" data-note="d2" onclick="document.getElementById('d2').play();"></div>
+                <div class="keys drum-buttons" data-note="d3" onclick="document.getElementById('d3').play();"></div>
+                <div class="keys drum-buttons" data-note="d4" onclick="document.getElementById('d4').play();"></div>
+                <div class="keys drum-buttons" data-note="d5" onclick="document.getElementById('d5').play();"></div>
+                <div class="keys drum-buttons" data-note="d6" onclick="document.getElementById('d6').play();"></div>
+                <div class="keys drum-buttons" data-note="d7" onclick="document.getElementById('d7').play();"></div>
+                <div class="keys drum-buttons" data-note="d8" onclick="document.getElementById('d8').play();"></div>
+                <div class="keys drum-buttons" data-note="d9" onclick="document.getElementById('d9').play();"></div>
+
+                <audio src="KeySounds/d1.mp3" id="d1"></audio>
+                <audio src="KeySounds/d2.mp3" id="d2"></audio>
+                <audio src="KeySounds/d3.mp3" id="d3"></audio>
+                <audio src="KeySounds/d4.mp3" id="d4"></audio>
+                <audio src="KeySounds/d5.mp3" id="d5"></audio>
+                <audio src="KeySounds/d6.mp3" id="d6"></audio>
+                <audio src="KeySounds/d7.mp3" id="d7"></audio>
+                <audio src="KeySounds/d8.mp3" id="d8"></audio>
+                <audio src="KeySounds/d9.mp3" id="d9"></audio>
+
+            </div>
+        </div>
+    
+    </div>
+</div>
+</body>
+</html>
